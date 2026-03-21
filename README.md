@@ -68,7 +68,7 @@ Restart the COOP server so it loads the plugin.
 This package implements the COOP plugin contract from `@roostorg/types`:
 
 - **Default export:** `CoopIntegrationPlugin` with `manifest` and `createSignals(context)`.
-- **Manifest:** `id`, `name`, `version`, `requiresConfig`, `configurationFields`, `signalTypeIds`, `modelCard` (with required sections `modelDetails` and `technicalIntegration`).
+- **Manifest:** `id`, `name`, `version`, `requiresConfig`, `configurationFields`, `signalTypeIds`, `modelCard` (must include every section id in `REQUIRED_MODEL_CARD_SECTION_IDS` from `@roostorg/types`; call `assertModelCardHasRequiredSections(modelCard)` when registering).
 - **createSignals:** Returns two descriptors:
   - `RANDOM_SIGNAL_SELECTION`: `run(input)` uses `context.getCredential(orgId)` for true percentage; returns `{ outputType: { scalarType: 'BOOLEAN' }, score: boolean }`.
   - `RANDOM_SCORE`: `run()` returns `{ outputType: { scalarType: 'NUMBER' }, score: number }` in [0, 1]; no config. Threshold is set in the rule (above/below).
