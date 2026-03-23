@@ -1,0 +1,6 @@
+# CODEOWNERS file for managing repository permissions
+# Format: path-pattern @username @org/team-name
+
+# Maintainers: Default owners for all files
+* @roostorg/roosters
+

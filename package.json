@@ -1,6 +1,6 @@
 {
   "name": "@roostorg/coop-integration-example",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Example package to show how a custom integration and signal can be used in COOP this is meant to be a reference repository and provide basic determination",
   "type": "module",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
     "example"
   ],
   "author": "Roostorg",
-  "license": "apache-2.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/roostorg/coop-integration-example.git"
@@ -33,10 +33,10 @@
   },
   "homepage": "https://github.com/roostorg/coop-integration-example#readme",
   "peerDependencies": {
-    "@roostorg/types": ">=1.0.0"
+    "@roostorg/types": ">=2.0.0"
   },
   "devDependencies": {
-    "@roostorg/types": "^1.1.1",
+    "@roostorg/types": "^2.0.0",
     "typescript": "^5.0.0"
   },
   "engines": {

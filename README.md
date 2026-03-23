@@ -10,7 +10,7 @@ Example [COOP](https://github.com/roostorg/coop) integration plugin. Reference r
 
 - **Integration:** `COOP_INTEGRATION_EXAMPLE`
 - **Signal 1 – Random Signal Selection** (`RANDOM_SIGNAL_SELECTION`): Returns `true` or `false` at random. The probability (0–100%) comes from the org’s integration config (“True percentage”). Set e.g. `70` in Org settings → Integrations; the signal returns `true` about 70% of the time. Use this to test config saving and boolean conditions.
-- **Signal 2 – Random Score** (`RANDOM_SCORE`): Returns a random number between 0 and 1. No integration config needed. In the rule builder you set a **threshold** (e.g. `0.5`) and choose **above** or **below**. Use this to test numeric score conditions (e.g. “score ≥ 0.5” or “score &lt; 0.3”).
+- **Signal 2 – Random Score** (`RANDOM_SCORE`): Returns a random number from **0 up to (but not including) 100**—the same 0–100 style as “True percentage,” so thresholds feel consistent. No integration config needed. In the rule builder set a **threshold** (e.g. `50`) and choose **above** or **below**. Use this to test numeric score conditions (e.g. “score ≥ 50” or “score &lt; 30”).
 
 ## Install
 
@@ -61,17 +61,17 @@ Restart the COOP server so it loads the plugin.
 1. **Org settings → Integrations** – you should see “COOP Integration Example”. Open it and set **True percentage (0–100)** (e.g. `70`) for Random Signal Selection. Save.
 2. **Rules (routing or enforcement)** – when adding a condition:
    - **Random Signal Selection**: Pick that signal; the condition uses your configured percentage (true/false).
-   - **Random Score**: Pick “Random Score”, then set a **threshold** (e.g. `0.5`) and choose **above** or **below**. The rule compares the random score to your threshold.
+   - **Random Score**: Pick “Random Score”, then set a **threshold** on the 0–100 scale (e.g. `50`) and choose **above** or **below**. The rule compares the random score to your threshold.
 
 ## Contract
 
 This package implements the COOP plugin contract from `@roostorg/types`:
 
 - **Default export:** `CoopIntegrationPlugin` with `manifest` and `createSignals(context)`.
-- **Manifest:** `id`, `name`, `version`, `requiresConfig`, `configurationFields`, `signalTypeIds`, `modelCard` (with required sections `modelDetails` and `technicalIntegration`).
+- **Manifest:** `id`, `name`, `version`, `requiresConfig`, `configurationFields`, `signalTypeIds`, `modelCard` (must include every section id in `REQUIRED_MODEL_CARD_SECTION_IDS` from `@roostorg/types`; call `assertModelCardHasRequiredSections(modelCard)` when registering).
 - **createSignals:** Returns two descriptors:
   - `RANDOM_SIGNAL_SELECTION`: `run(input)` uses `context.getCredential(orgId)` for true percentage; returns `{ outputType: { scalarType: 'BOOLEAN' }, score: boolean }`.
-  - `RANDOM_SCORE`: `run()` returns `{ outputType: { scalarType: 'NUMBER' }, score: number }` in [0, 1]; no config. Threshold is set in the rule (above/below).
+  - `RANDOM_SCORE`: `run()` returns `{ outputType: { scalarType: 'NUMBER' }, score: number }` in **[0, 100)** (`Math.random() * 100`); no config. Threshold is set in the rule on the same scale (above/below).
 
 ## Publishing
 
