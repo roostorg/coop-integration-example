@@ -1,7 +1,7 @@
 /**
  * Example COOP integration plugin with two signal types:
  * 1. Random Signal Selection – boolean, probability from org config (tests config saving).
- * 2. Random Score – numeric [0, 1], threshold set in the rule (tests score vs threshold).
+ * 2. Random Score – numeric 0–100, threshold set in the rule (tests score vs threshold).
  */
 
 import {
@@ -20,7 +20,7 @@ const DEFAULT_TRUE_PERCENTAGE = 50;
 
 const modelCard: ModelCard = {
   modelName: 'COOP Integration Example',
-  version: '1.0.0',
+  version: '2.0.0',
   releaseDate: 'March 2026',
   sections: [
     {
@@ -84,12 +84,17 @@ const modelCard: ModelCard = {
       fields: [
         {
           label: 'Signals',
-          value: `${SIGNAL_TYPE_RANDOM_SELECTION} (boolean; org config truePercentage 0–100). ${SIGNAL_TYPE_RANDOM_SCORE} (number; set threshold and above/below in the rule).`,
+          value: `${SIGNAL_TYPE_RANDOM_SELECTION} (boolean; org config truePercentage 0–100). ${SIGNAL_TYPE_RANDOM_SCORE} (number 0–100; set threshold and above/below in the rule).`,
         },
         {
           label: 'Configuration',
           value:
             'Random Signal Selection requires org integration config (true percentage). Random Score requires no integration config.',
+        },
+        {
+          label: 'Versioning',
+          value:
+            'modelCard.version and manifest.version identify this integration plugin release. They are independent of the @roostorg/types dependency major version (e.g. 2.x).',
         },
       ],
     },
@@ -115,7 +120,8 @@ assertModelCardHasRequiredSections(modelCard);
 const manifest: IntegrationManifest = {
   id: INTEGRATION_ID,
   name: 'COOP Integration Example',
-  version: '1.0.0',
+  /** Same semver as modelCard.version: this plugin’s release, not @roostorg/types. */
+  version: '2.0.0',
   description:
     'Example plugin with two signals: config-driven boolean and a numeric score you compare with a threshold in the rule.',
   docsUrl: 'https://roostorg.github.io/coop/INTEGRATIONS_PLUGIN.html',
@@ -215,11 +221,11 @@ function createRandomScoreDescriptor(
     id: { type: SIGNAL_TYPE_RANDOM_SCORE },
     displayName: 'Random Score',
     description:
-      'Returns a random number between 0 and 1. Set a threshold in the rule (e.g. 0.5) and choose "above" or "below" to test numeric conditions.',
+      'Returns a random number from 0 up to (but not including) 100. Set a threshold in the rule (e.g. 50) and choose "above" or "below" to test numeric conditions.',
     docsUrl: null,
     recommendedThresholds: {
-      highPrecisionThreshold: 0.5,
-      highRecallThreshold: 0.5,
+      highPrecisionThreshold: 50,
+      highRecallThreshold: 50,
     },
     supportedLanguages: 'ALL',
     pricingStructure: { type: 'FREE' },
@@ -235,8 +241,7 @@ function createRandomScoreDescriptor(
     async run(
       _input: unknown,
     ): Promise<{ outputType: typeof outputType; score: number }> {
-      // Returns a random number between 0 and 100.
-      // Because outputType is { scalarType: 'NUMBER' }, Coop can take the score and compare it to a threshold in the rule.
+      // [0, 100) — same scale as percentages elsewhere in this plugin (e.g. truePercentage).
       const score = Math.random() * 100;
       return { outputType, score };
     },
