@@ -1,6 +1,6 @@
 # @roostorg/coop-integration-example
 
-Example [COOP](https://github.com/roostorg/coop) integration plugin. Reference repository showing how to build a custom integration and signals for use in COOP.
+Example [Coop](https://github.com/roostorg/coop) integration plugin. Reference repository showing how to build a custom integration and signals for use in Coop.
 
 - **Integration config** – saving and loading per-org config (e.g. “True percentage”)
 - **Routing rules** – using the plugin signal in conditions
@@ -29,12 +29,12 @@ npm run build
 npm install @roostorg/coop-integration-example
 ```
 
-## Configure in COOP
+## Configure in Coop
 
-In your COOP `integrations.config.json` (or `INTEGRATIONS_CONFIG_PATH`), add:
+In your Coop `integrations.config.json` (or `INTEGRATIONS_CONFIG_PATH`), add:
 
 **Local path (development):**  
-If you cloned this repo next to your COOP server directory, use a path relative to the server (e.g. from `server/`):
+If you cloned this repo next to your Coop server directory, use a path relative to the server (e.g. from `server/`):
 
 ```json
 {
@@ -54,18 +54,18 @@ If you cloned this repo next to your COOP server directory, use a path relative 
 }
 ```
 
-Restart the COOP server so it loads the plugin.
+Restart the Coop server so it loads the plugin.
 
 ## Use in the app
 
-1. **Org settings → Integrations** – you should see “COOP Integration Example”. Open it and set **True percentage (0–100)** (e.g. `70`) for Random Signal Selection. Save.
+1. **Org settings → Integrations** – you should see Coop Integration Example”. Open it and set **True percentage (0–100)** (e.g. `70`) for Random Signal Selection. Save.
 2. **Rules (routing or enforcement)** – when adding a condition:
    - **Random Signal Selection**: Pick that signal; the condition uses your configured percentage (true/false).
    - **Random Score**: Pick “Random Score”, then set a **threshold** on the 0–100 scale (e.g. `50`) and choose **above** or **below**. The rule compares the random score to your threshold.
 
 ## Contract
 
-This package implements the COOP plugin contract from `@roostorg/types`:
+This package implements the Coop plugin contract from `@roostorg/types`:
 
 - **Default export:** `CoopIntegrationPlugin` with `manifest` and `createSignals(context)`.
 - **Manifest:** `id`, `name`, `version`, `requiresConfig`, `configurationFields`, `signalTypeIds`, `modelCard` (must include every section id in `REQUIRED_MODEL_CARD_SECTION_IDS` from `@roostorg/types`; call `assertModelCardHasRequiredSections(modelCard)` when registering).
