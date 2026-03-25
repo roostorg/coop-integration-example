@@ -1,6 +1,6 @@
 {
   "name": "@roostorg/coop-integration-example",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Example package to show how a custom integration and signal can be used in COOP this is meant to be a reference repository and provide basic determination",
   "type": "module",
   "main": "dist/index.js",

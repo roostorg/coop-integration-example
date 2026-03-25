@@ -1,5 +1,5 @@
 /**
- * Example COOP integration plugin with two signal types:
+ * Example Coop integration plugin with two signal types:
  * 1. Random Signal Selection – boolean, probability from org config (tests config saving).
  * 2. Random Score – numeric 0–100, threshold set in the rule (tests score vs threshold).
  */
@@ -19,8 +19,8 @@ const INTEGRATION_ID = 'COOP_INTEGRATION_EXAMPLE';
 const DEFAULT_TRUE_PERCENTAGE = 50;
 
 const modelCard: ModelCard = {
-  modelName: 'COOP Integration Example',
-  version: '2.0.0',
+  modelName: 'Coop Integration Example',
+  version: '2.0.1',
   releaseDate: 'March 2026',
   sections: [
     {
@@ -119,9 +119,9 @@ assertModelCardHasRequiredSections(modelCard);
 
 const manifest: IntegrationManifest = {
   id: INTEGRATION_ID,
-  name: 'COOP Integration Example',
+  name: 'Coop Integration Example',
   /** Same semver as modelCard.version: this plugin’s release, not @roostorg/types. */
-  version: '2.0.0',
+  version: '2.0.1',
   description:
     'Example plugin with two signals: config-driven boolean and a numeric score you compare with a threshold in the rule.',
   docsUrl: 'https://roostorg.github.io/coop/INTEGRATIONS_PLUGIN.html',
