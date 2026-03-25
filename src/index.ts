@@ -20,7 +20,7 @@ const DEFAULT_TRUE_PERCENTAGE = 50;
 
 const modelCard: ModelCard = {
   modelName: 'Coop Integration Example',
-  version: '2.0.0',
+  version: '2.0.1',
   releaseDate: 'March 2026',
   sections: [
     {
@@ -121,7 +121,7 @@ const manifest: IntegrationManifest = {
   id: INTEGRATION_ID,
   name: 'Coop Integration Example',
   /** Same semver as modelCard.version: this plugin’s release, not @roostorg/types. */
-  version: '2.0.0',
+  version: '2.0.1',
   description:
     'Example plugin with two signals: config-driven boolean and a numeric score you compare with a threshold in the rule.',
   docsUrl: 'https://roostorg.github.io/coop/INTEGRATIONS_PLUGIN.html',
