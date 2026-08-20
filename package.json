@@ -8,8 +8,7 @@
   "files": [
     "dist",
     "README.md",
-    "roost-example-logo.png",
-    "roost-example-with-background.png"
+    "roost-mark-charcoal.svg"
   ],
   "scripts": {
     "build": "tsc",
