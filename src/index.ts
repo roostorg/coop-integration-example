@@ -140,7 +140,7 @@ const manifest: IntegrationManifest = {
   signalTypeIds: [SIGNAL_TYPE_RANDOM_SELECTION, SIGNAL_TYPE_RANDOM_SCORE],
   modelCard,
   logoPath: 'roost-mark-charcoal.svg',
-  logoWithBackgroundPath: 'roost-mark-charcoal.svg',
+  logoWithBackgroundPath: 'roost-badge-charcoal.svg',
 };
 
 /** Parses truePercentage from org config; returns 0–100, default 50 if missing or invalid. */
